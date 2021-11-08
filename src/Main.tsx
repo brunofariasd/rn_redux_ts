@@ -1,8 +1,7 @@
 import React from 'react';
 
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from './reducers';
-import { increment, decrement } from './stores/storeCounter.store';
+import { useAppDispatch, useAppSelector } from './hooks';
+import { increment, decrement } from './hooks/storeCounter.store';
 
 import {
   Container,
@@ -14,10 +13,8 @@ import {
 } from './styles';
 
 const Main: React.FC = () => {
-  const dispatch = useDispatch();
-  const counterReducer = useSelector(
-    (state: RootState) => state.counterReducer,
-  );
+  const dispatch = useAppDispatch();
+  const counterReducer = useAppSelector((state) => state.counterReducer);
 
   return (
     <Container>
@@ -27,14 +24,14 @@ const Main: React.FC = () => {
       <ContainerButton>
         <ButtonContainer
           onPress={() => {
-            dispatch(increment());
+            dispatch(increment(2));
           }}
         >
           <ButtonText>Incrementar</ButtonText>
         </ButtonContainer>
         <ButtonContainer
           onPress={() => {
-            dispatch(decrement());
+            dispatch(decrement(1));
           }}
         >
           <ButtonText>Decrementar</ButtonText>
